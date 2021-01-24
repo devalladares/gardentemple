@@ -55,7 +55,7 @@ function draw() {
 		empty = true
 	}
 
-	console.log(blocker.style.display === 'block')
+	// console.log(blocker.style.display === 'block')
 }
 
 function mainDraw() {
