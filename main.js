@@ -1,7 +1,7 @@
 //	// PRESENTATION
 const speederBoi = 300
 // let presentation = false
-presentation = true
+let presentation = true
 
 // // // WORKING
 // const speederBoi = 1400
