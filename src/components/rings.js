@@ -11,11 +11,11 @@ import {
 
 import {
 	GLTFLoader
-} from '../../../examples/jsm/loaders/GLTFLoader.js';
+} from '../../examples/jsm/loaders/GLTFLoader.js';
 
 import {
 	RoughnessMipmapper
-} from '../../../examples/jsm/utils/RoughnessMipmapper.js';
+} from '../../examples/jsm/utils/RoughnessMipmapper.js';
 
 function createRing(scene, ringBallSize, ringCount,  ringRadius, yRingPos, ringNumber, ringPos, rings, loadingManager) {
 
