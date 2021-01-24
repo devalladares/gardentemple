@@ -1,10 +1,10 @@
 //	// PRESENTATION
-// const speederBoi = 300
-let presentation = false
-// presentation = true
+const speederBoi = 300
+// let presentation = false
+presentation = true
 
 // // // WORKING
-const speederBoi = 1400
+// const speederBoi = 1400
 
 ////////////////// GLOBAL VARIABLES /////////////////
 let xxx = 0
