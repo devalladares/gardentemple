@@ -18,336 +18,326 @@ let yHeight = outerRadius
 
 
 function setup() {
-	var c = createCanvas(windowWidth, windowHeight);
-	c.parent('p5Div');
-	circleNumber = width / (outerRadius * 2) + 1
-	deader2 = width - (deader)
-	strokeCap(SQUARE);
+  var c = createCanvas(windowWidth, windowHeight);
+  c.parent('p5Div');
+  circleNumber = width / (outerRadius * 2) + 1
+  deader2 = width - (deader)
+  strokeCap(SQUARE);
 
- }
+}
 
 function resetSketch() {
-	for (let i = 0; i < circleNumber; i++) {
-		circles.push(new createCircle(i, deader))
-	}
-	for (let i = 0; i < circleNumber; i++) {
-		lowercircles.push(new createCircle(i, -deader))
-	}
+  for (let i = 0; i < circleNumber; i++) {
+    circles.push(new createCircle(i, deader))
+  }
+  for (let i = 0; i < circleNumber; i++) {
+    lowercircles.push(new createCircle(i, -deader))
+  }
 
 
 }
 
 function draw() {
 
-	stroke('red')
-	line(deader, 0, deader, height)
+  stroke('red')
+  line(deader, 0, deader, height)
 
-	const blocker = document.getElementById('blocker');
+  const blocker = document.getElementById('blocker');
 
-	if (blocker.style.display === 'block') {
-		if (empty) {
-			resetSketch()
-			empty = false
-		}
-		mainDraw()
-	} else if (blocker.style.display === 'none') {
-		mainSplice()
-		empty = true
-	}
-
-	// console.log(blocker.style.display === 'block')
+  if (blocker.style.display === 'block') {
+    if (empty) {
+      resetSketch()
+      empty = false
+    }
+    mainDraw()
+  } else if (blocker.style.display === 'none') {
+    mainSplice()
+    empty = true
+  }
 }
 
 function mainDraw() {
 
-	clear()
+  clear()
 
-	for (let i = circles.length - 1; i >= 0; i--) {
+  for (let i = circles.length - 1; i >= 0; i--) {
 
-		circles[i].update(200, yHeight, xSpeed)
+    circles[i].update(200, yHeight, xSpeed)
 
-		if (circles[i].isDead(deader)) {
-			circles.splice(i, 1)
-			newPush()
-		}
-	}
+    if (circles[i].isDead(deader)) {
+      circles.splice(i, 1)
+      newPush()
+    }
+  }
 
-	for (let j = lowercircles.length - 1; j >= 0; j--) {
+  for (let j = lowercircles.length - 1; j >= 0; j--) {
 
-		lowercircles[j].update(200, height - yHeight, -xSpeed * 2)
+    lowercircles[j].update(200, height - yHeight, -xSpeed * 2)
 
-		if (lowercircles[j].isDead2(deader2)) {
-			lowercircles.splice(j, 1)
-			newPush2()
-		}
-	}
+    if (lowercircles[j].isDead2(deader2)) {
+      lowercircles.splice(j, 1)
+      newPush2()
+    }
+  }
 }
-
-// function keyPressed() {
-//
-// 	console.log("hi")
-//
-// 	circles = []
-// 	lowercircles = []
-// }
 
 function mainSplice() {
 
-	circles = []
-	lowercircles = []
+  circles = []
+  lowercircles = []
 }
 
 function newPush() {
-	circles.push(new createCircle(circles.length + 1, deader))
+  circles.push(new createCircle(circles.length + 1, deader))
 }
 
 function newPush2() {
-	lowercircles.push(new createCircle(-1, -deader))
+  lowercircles.push(new createCircle(-1, -deader))
 }
 
 class createCircle {
 
-	constructor(circleNum, newDeader) {
+  constructor(circleNum, newDeader) {
 
-		this.circle = []
-		this.pos = 0
-		// this.xPos = 60
-		this.xPos = newDeader
-		this.circleNum = circleNum;
+    this.circle = []
+    this.pos = 0
+    // this.xPos = 60
+    this.xPos = newDeader
+    this.circleNum = circleNum;
 
-		this.create()
-	}
+    this.create()
+  }
 
-	create() {
-		for (let i = 0; i < ringNumber; i++) {
+  create() {
+    for (let i = 0; i < ringNumber; i++) {
 
-			this.origin = i * gap + emptySpace2
-			this.outerRadius = ringNumber * gap + emptySpace2
+      this.origin = i * gap + emptySpace2
+      this.outerRadius = ringNumber * gap + emptySpace2
 
-			this.circle.push(new circleRing(this.origin, this.outerRadius))
+      this.circle.push(new circleRing(this.origin, this.outerRadius))
 
-		}
-	}
+    }
+  }
 
-	update(dist, yHeight, xSpeed) {
+  update(dist, yHeight, xSpeed) {
 
-		push()
+    push()
 
-		this.xPos -= xSpeed
+    this.xPos -= xSpeed
 
-		this.pos = this.xPos + (this.circleNum * dist) / 1.25;
+    this.pos = this.xPos + (this.circleNum * dist) / 1.25;
 
-		translate(this.pos, yHeight)
-		scale(scaler, scaler)
+    translate(this.pos, yHeight)
+    scale(scaler, scaler)
 
-		for (let circles of this.circle) {
-			circles.update()
-		}
-		pop()
+    for (let circles of this.circle) {
+      circles.update()
+    }
+    pop()
 
-		stroke('white')
-		line(0, height - this.outerRadius * 2, width, height - this.outerRadius * 2)
-		line(0, this.outerRadius * 2, width, this.outerRadius * 2)
-	}
+    stroke('white')
+    line(0, height - this.outerRadius * 2, width, height - this.outerRadius * 2)
+    line(0, this.outerRadius * 2, width, this.outerRadius * 2)
+  }
 
-	isDead(whenDisappear) {
-		if (this.pos < whenDisappear) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	isDead2(whenDisappear) {
-		if (this.pos > whenDisappear) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+  isDead(whenDisappear) {
+    if (this.pos < whenDisappear) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  isDead2(whenDisappear) {
+    if (this.pos > whenDisappear) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 
 class circleRing {
-	constructor(radius, bigRadius) {
-		//general
-		this.random = random(0, 13)
+  constructor(radius, bigRadius) {
+    //general
+    this.random = random(0, 13)
 
 
-		//cirler
-		this.bigRadius = bigRadius
-		this.rotate = random(0.0005, 0.0001)
-		// this.rotate = 0.00025
-		this.r = random(1, 20)
-		this.r2 = random(1, 20)
-		this.num = round(random(10, 50))
-		this.radius = radius
-		this.stroke = random(0, 255)
-		this.fill = random(0, 255)
-		this.alpha = random(0, 100)
-		this.angle = TAU / this.num
+    //cirler
+    this.bigRadius = bigRadius
+    this.rotate = random(0.0005, 0.0001)
+    // this.rotate = 0.00025
+    this.r = random(1, 20)
+    this.r2 = random(1, 20)
+    this.num = round(random(10, 50))
+    this.radius = radius
+    this.stroke = random(0, 255)
+    this.fill = random(0, 255)
+    this.alpha = random(0, 100)
+    this.angle = TAU / this.num
 
-		//liner
-		this.lineNum = random(1, 10)
-		this.lineStroke = random(0.1, 2)
+    //liner
+    this.lineNum = random(1, 10)
+    this.lineStroke = random(0.1, 2)
 
-		//radianter
-		this.radNum = random(10, this.radius)
-		this.radAngle = TAU / this.radNum
-		this.lineLength = random(5, 50)
-		this.radius1 = this.radius + this.lineLength / 5
-		this.radius2 = this.radius - this.lineLength / 5
+    //radianter
+    this.radNum = random(10, this.radius)
+    this.radAngle = TAU / this.radNum
+    this.lineLength = random(5, 50)
+    this.radius1 = this.radius + this.lineLength / 5
+    this.radius2 = this.radius - this.lineLength / 5
 
-		//petaler
-		this.petNum = round(random(10, 50))
-		// this.petNum = round(random(1,10))
-		this.petSize = random(2, 20)
-		this.petAngle = TAU / this.petNum
-		this.petRadius = random(5, 20)
-		this.petStroke = this.petRadius / 2
+    //petaler
+    this.petNum = round(random(10, 50))
+    // this.petNum = round(random(1,10))
+    this.petSize = random(2, 20)
+    this.petAngle = TAU / this.petNum
+    this.petRadius = random(5, 20)
+    this.petStroke = this.petRadius / 2
 
-		//squarer
-		this.squareNum = round(random(5, 40))
-		this.squareSize = random(1, 10)
-		this.squareAngle = TAU / this.squareNum
-		this.squareRand = round(random(0, 2))
+    //squarer
+    this.squareNum = round(random(5, 40))
+    this.squareSize = random(1, 10)
+    this.squareAngle = TAU / this.squareNum
+    this.squareRand = round(random(0, 2))
 
-	}
+  }
 
-	style() {
-		// stroke(this.stroke)
-		// fill(this.fill)
-		noStroke()
-		fill(255)
-		// stroke(0)
-		// noFill()
-	}
-
-
-	update(pos) {
-
-		this.style()
-
-		if (this.random < 2) {
-			this.circler()
-		} else if (this.random > 2 && this.random < 6) {
-			this.liner()
-		} else if (this.random > 6 && this.random < 10) {
-			this.radianter()
-		} else if (this.random > 10 && this.random < 11) {
-			// this.petaler()
-		} else if (this.random > 11 && this.random < 13) {
-			this.squarer()
-		}
-
-		// this.squarer()
-		this.outliner()
+  style() {
+    // stroke(this.stroke)
+    // fill(this.fill)
+    noStroke()
+    fill(255)
+    // stroke(0)
+    // noFill()
+  }
 
 
-	}
+  update(pos) {
 
-	//cirler////cirler////cirler////cirler////cirler////cirler//
-	circler() {
-		rotate(frameCount * this.rotate)
+    this.style()
 
-		noStroke()
-		fill(255)
+    if (this.random < 2) {
+      this.circler()
+    } else if (this.random > 2 && this.random < 6) {
+      this.liner()
+    } else if (this.random > 6 && this.random < 10) {
+      this.radianter()
+    } else if (this.random > 10 && this.random < 11) {
+      // this.petaler()
+    } else if (this.random > 11 && this.random < 13) {
+      this.squarer()
+    }
 
-		for (let i = 0; i < this.num; i++) {
+    // this.squarer()
+    this.outliner()
 
-			this.x = sin(i * this.angle) * this.radius
-			this.y = cos(i * this.angle) * this.radius
 
-			ellipse(this.x, this.y, this.r)
-		}
-	}
+  }
 
-	//liner////liner////liner////liner////liner////liner//
-	liner() {
+  //cirler////cirler////cirler////cirler////cirler////cirler//
+  circler() {
+    rotate(frameCount * this.rotate)
 
-		stroke(255)
-		noFill()
-		strokeWeight(this.lineStroke)
+    noStroke()
+    fill(255)
 
-		for (let i = 0; i < this.lineNum; i++) {
+    for (let i = 0; i < this.num; i++) {
 
-			// let y = abs(sin(i * 0.02 - frameCount * 0.005) * 255)
-			// stroke(y)
+      this.x = sin(i * this.angle) * this.radius
+      this.y = cos(i * this.angle) * this.radius
 
-			// circle(0, 0, (this.radius * 2) - (i * this.lineNum / 2) + (i * this.lineNum))
-			circle(0, 0, (this.radius * 2) - (i * this.lineNum / 2) + (i * this.lineNum / 2))
-			// circle(0, 0, (this.radius * 2) + (i * this.lineNum))
-		}
-	}
+      ellipse(this.x, this.y, this.r)
+    }
+  }
 
-	//radianter////radianter////radianter////radianter////radianter////radianter//
-	radianter() {
+  //liner////liner////liner////liner////liner////liner//
+  liner() {
 
-		rotate(frameCount * this.rotate)
-		stroke(255)
-		strokeWeight(this.lineStroke)
+    stroke(255)
+    noFill()
+    strokeWeight(this.lineStroke)
 
-		for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < this.lineNum; i++) {
 
-			this.x1 = cos(i * this.angle) * this.radius1
-			this.y1 = sin(i * this.angle) * this.radius1
-			this.x2 = cos(i * this.angle) * this.radius2
-			this.y2 = sin(i * this.angle) * this.radius2
+      // let y = abs(sin(i * 0.02 - frameCount * 0.005) * 255)
+      // stroke(y)
 
-			line(this.x1, this.y1, this.x2, this.y2)
-		}
-	}
+      // circle(0, 0, (this.radius * 2) - (i * this.lineNum / 2) + (i * this.lineNum))
+      circle(0, 0, (this.radius * 2) - (i * this.lineNum / 2) + (i * this.lineNum / 2))
+      // circle(0, 0, (this.radius * 2) + (i * this.lineNum))
+    }
+  }
 
-	//squarer////squarer////squarer////squarer////squarer////squarer//
-	squarer() {
+  //radianter////radianter////radianter////radianter////radianter////radianter//
+  radianter() {
 
-		this.numm = 30
+    rotate(frameCount * this.rotate)
+    stroke(255)
+    strokeWeight(this.lineStroke)
 
-		fill(255)
-		noStroke()
-		rectMode(CENTER)
+    for (let i = 0; i < 50; i++) {
 
-		for (let i = 0; i < this.squareNum; i++) {
+      this.x1 = cos(i * this.angle) * this.radius1
+      this.y1 = sin(i * this.angle) * this.radius1
+      this.x2 = cos(i * this.angle) * this.radius2
+      this.y2 = sin(i * this.angle) * this.radius2
 
-			push()
-			translate(this.radius, 0)
-			if (this.squareRand < 1) {
-				rotate(radians(45))
-			}
+      line(this.x1, this.y1, this.x2, this.y2)
+    }
+  }
 
-			rect(0, 0, this.squareSize, this.squareSize)
+  //squarer////squarer////squarer////squarer////squarer////squarer//
+  squarer() {
 
-			pop()
-			rotate(this.squareAngle)
-		}
-	}
+    this.numm = 30
 
-	//petaler////petaler////petaler////petaler////petaler////petaler//
-	petaler() {
+    fill(255)
+    noStroke()
+    rectMode(CENTER)
 
-		fill(255)
-		noStroke()
+    for (let i = 0; i < this.squareNum; i++) {
 
-		for (let i = 0; i < this.petNum; i++) {
+      push()
+      translate(this.radius, 0)
+      if (this.squareRand < 1) {
+        rotate(radians(45))
+      }
 
-			let x = sin(this.petAngle * i) * this.radius
-			let y = cos(this.petAngle * i) * this.radius
+      rect(0, 0, this.squareSize, this.squareSize)
 
-			ellipse(x, y, this.petRadius)
-		}
+      pop()
+      rotate(this.squareAngle)
+    }
+  }
 
-		stroke(255)
-		noFill()
-		strokeWeight(this.petStroke)
-		ellipse(0, 0, this.radius * 2 - this.petRadius)
-	}
+  //petaler////petaler////petaler////petaler////petaler////petaler//
+  petaler() {
 
-	outliner() {
-		strokeWeight(this.lineStroke + 1)
-		// strokeWeight(5)
-		noFill()
-		stroke('white')
-		circle(0, 0, this.bigRadius * 2)
-		// circle(0, 0, 1)
-		// line()
-	}
+    fill(255)
+    noStroke()
+
+    for (let i = 0; i < this.petNum; i++) {
+
+      let x = sin(this.petAngle * i) * this.radius
+      let y = cos(this.petAngle * i) * this.radius
+
+      ellipse(x, y, this.petRadius)
+    }
+
+    stroke(255)
+    noFill()
+    strokeWeight(this.petStroke)
+    ellipse(0, 0, this.radius * 2 - this.petRadius)
+  }
+
+  outliner() {
+    strokeWeight(this.lineStroke + 1)
+    // strokeWeight(5)
+    noFill()
+    stroke('white')
+    circle(0, 0, this.bigRadius * 2)
+    // circle(0, 0, 1)
+    // line()
+  }
 }
