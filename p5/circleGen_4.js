@@ -26,7 +26,9 @@ function setup() {
 
 }
 
+
 function resetSketch() {
+
   for (let i = 0; i < circleNumber; i++) {
     circles.push(new createCircle(i, deader))
   }
