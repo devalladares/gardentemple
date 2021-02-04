@@ -10,9 +10,9 @@ function setup() {
 	var c = createCanvas(windowWidth, windowHeight);
 	c.parent('p5Div');
 
-	refresh = createButton('Refresh');
-	refresh.position(width / 2, height - 50)
-	refresh.mousePressed(runSketch);
+	// refresh = createButton('Refresh');
+	// refresh.position(width / 2, height - 50)
+	// refresh.mousePressed(runSketch);
 
 }
 
