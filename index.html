@@ -1,50 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
+	<!DOCTYPE html>
+	<html lang="en">
 
-<head>
-	<title>Garden Temple</title>
-	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<head>
+		<title>Garden Temple</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
-	<link href="https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@500&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="styles/styles.css">
+		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@500&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="styles/styles.css">
 
-	<!-- favicon -->
-	<link rel="icon" href="styles/favi1.png" type="image/x-icon" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/addons/p5.sound.min.js"></script>
+		<!-- favicon -->
+		<link rel="icon" href="styles/favi1.png" type="image/x-icon" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/addons/p5.sound.min.js"></script>
 
-</head>
+	</head>
 
-<body>
+	<body>
 
-	<section id="loading-screen">
-		<div id="loader"></div>
+		<section id="loading-screen">
+			<div id="loader"></div>
 
-	</section>
+		</section>
 
-	<div id="blocker" style="display: block">
+		<div id="blocker" style="display: block">
 
-		<div id="instructions">
+			<div id="instructions">
 
-			<meta charset="utf-8" />
-			<!-- <p style="color: white; font-size: 150pt"> ◎<br />Garden <br /> Temple </p> -->
-			<p style="color: white; font-size: 150pt"> Ġarďėņ <br /> Tėmpļe
-				<!-- <span style="color: white;font-size: 14pt"> <br /> Click to Enter · Best experienced with headphones </span> -->
+				<meta charset="utf-8" />
+				<!-- <p style="color: white; font-size: 150pt"> ◎<br />Garden <br /> Temple </p> -->
+				<p style="color: white; font-size: 150pt; line-height:90px"> Ġarďėņ <br /> <br /> Tėmpļe <br />
 
-			</p>
-			<div id='p5Div'></div>
+					<span style="color: white;font-size: 14pt;line-height: 1px"> Click to Enter · Best experienced with headphones </span>
 
+				</p>
+				<div id='p5Div'></div>
+
+
+			</div>
+		</div>
+		<div id="container">
 
 		</div>
-	</div>
-	<div id="container">
 
-	</div>
+		<script src="p5/circleGen_4.js"></script>
+		<!-- <script src="p5/circleGen_5.js"></script> -->
+		<script type="module" src="./main.js"></script>
 
-	<script src="p5/circleGen_4.js"></script>
-	<!-- <script src="p5/circleGen_5.js"></script> -->
-	<script type="module" src="./main.js"></script>
+	</body>
 
-</body>
-
-</html>
+	</html>

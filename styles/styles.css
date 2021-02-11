@@ -61,11 +61,12 @@ a:hover {
   box-align: center;
   color: #ffffff;
   text-align: center;
-  /* font-family: 'Cormorant Unicase', serif; */
   font-family: 'Signifier', serif;
-  font-size: 30px;
-  line-height: 161px;
-  cursor: cell;
+  /* cursor: cell; */
+}
+
+br {
+  line-height: 20%;
 }
 
 #loading-screen {

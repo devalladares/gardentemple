@@ -21,7 +21,7 @@ function setup() {
   var c = createCanvas(windowWidth, windowHeight);
   c.parent('p5Div');
   circleNumber = width / (outerRadius * 2) + 1
-  deader2 = width - (deader)
+  deader2 = windowWidth - (deader) + 80
   strokeCap(SQUARE);
 
 }
@@ -103,7 +103,6 @@ class createCircle {
 
     this.circle = []
     this.pos = 0
-    // this.xPos = 60
     this.xPos = newDeader
     this.circleNum = circleNum;
 
