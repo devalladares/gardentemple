@@ -45,8 +45,8 @@ function init() {
 	renderer = createRenderer();
 	container.append(renderer.domElement);
 
-	stats = new Stats();
-	container.appendChild(stats.dom);
+	//stats = new Stats();
+	//container.appendChild(stats.dom);
 
 	window.addEventListener('resize', onWindowResize, false);
 
@@ -291,7 +291,7 @@ function onTransitionEnd(event) {
 
 function animate() {
 	requestAnimationFrame(animate);
-	stats.update();
+	//stats.update();
 	render()
 }
 
